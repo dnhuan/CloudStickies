@@ -12,18 +12,22 @@ export function Stickies() {
 			<div className={styles.row}>
 				<button
 					className={styles.button}
-					onClick={() => dispatch(addSticky("New Sticky"))}
+					onClick={() =>
+						dispatch(addSticky({ id: "4", content: "new" }))
+					}
 				>
 					Add Sticky
 				</button>
 			</div>
 			<div className={styles.row}>
 				<ul>
-					{stickies.map((sticky, index) => (
-						<li key={index}>
-							{sticky}
+					{stickies.map((sticky) => (
+						<li key={sticky.id}>
+							{sticky.content}
 							<button
-								onClick={() => dispatch(deleteSticky(index))}
+								onClick={() =>
+									dispatch(deleteSticky(sticky.id))
+								}
 							>
 								Delete
 							</button>
