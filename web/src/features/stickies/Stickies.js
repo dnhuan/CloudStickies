@@ -1,40 +1,39 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectStickies, addSticky, deleteSticky } from "./stickiesSlice";
-import styles from "./Stickies.module.css";
+import { Box, Button, Text, UnorderedList, ListItem } from "@chakra-ui/react";
 
 export function Stickies() {
 	const stickies = useSelector(selectStickies);
 	const dispatch = useDispatch();
 
 	return (
-		<div>
-			<div className={styles.row}>
-				<button
-					className={styles.button}
+		<Box>
+			<Box>
+				<Button
 					onClick={() =>
 						dispatch(addSticky({ id: "4", content: "new" }))
 					}
 				>
-					Add Sticky
-				</button>
-			</div>
-			<div className={styles.row}>
-				<ul>
+					<Text>Add Sticky</Text>
+				</Button>
+			</Box>
+			<Box>
+				<UnorderedList>
 					{stickies.map((sticky) => (
-						<li key={sticky.id}>
+						<ListItem key={sticky.id}>
 							{sticky.content}
-							<button
+							<Button
 								onClick={() =>
 									dispatch(deleteSticky(sticky.id))
 								}
 							>
-								Delete
-							</button>
-						</li>
+								<Text>Delete</Text>
+							</Button>
+						</ListItem>
 					))}
-				</ul>
-			</div>
-		</div>
+				</UnorderedList>
+			</Box>
+		</Box>
 	);
 }
