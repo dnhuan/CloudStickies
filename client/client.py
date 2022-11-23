@@ -1,5 +1,8 @@
+#!python3
+
 from striprtf.striprtf import rtf_to_text
 import os
+import json
 
 appEnv = "DEV" if os.getenv("PYENV") != "PROD" else "PROD"
 user = os.path.expanduser('~')
@@ -29,15 +32,17 @@ def getSavedStickiesStatePath(stickiesDBPath):
 def getStickies(stickiesDBPath):
     stickiesNames = [path.split(".")[0] for path in os.listdir(
         stickiesDBPath) if path.endswith(".rtfd")]
-    stickiesContent = {}
+    stickiesContent = []
     for stickyName in stickiesNames:
         stickyPath = os.path.join(stickiesDBPath, stickyName + ".rtfd")
         with open(os.path.join(stickyPath, "TXT.rtf")) as infile:
             content = infile.read()
             text = rtf_to_text(content)
-            stickiesContent[stickyName] = text
+            sticky = {}
+            sticky["id"] = stickyName
+            sticky["content"] = text
+            stickiesContent.append(sticky)
 
-    print(stickiesContent)
     return stickiesContent
 
 
@@ -45,6 +50,7 @@ def main():
     printConfig()
     savedStickiesStatePath = getSavedStickiesStatePath(stickiesDBPath)
     stickies = getStickies(stickiesDBPath)
+    print(json.dumps(stickies))
 
 
 if __name__ == "__main__":
