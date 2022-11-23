@@ -5,7 +5,7 @@ import { Resizable } from "re-resizable";
 export function DragResizable({ children, x, y, h, w }) {
 	return (
 		<Draggable
-			handle=".drag-resizable__body"
+			handle=".drag-resizable__handler"
 			defaultPosition={{ x: x, y: y }}
 		>
 			<Resizable

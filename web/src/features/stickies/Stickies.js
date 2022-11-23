@@ -9,14 +9,7 @@ export function Stickies() {
 	const stickies = useSelector(selectStickies);
 
 	return (
-		<Box
-			id="stickies__body"
-			style={{
-				height: "fit-content",
-				boxSizing: "border-box",
-				width: "100%",
-			}}
-		>
+		<Box id="stickies__body" style={{}}>
 			<Box>
 				{stickies.map((sticky, index) => (
 					<DragResizable

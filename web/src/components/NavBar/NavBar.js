@@ -13,7 +13,6 @@ import {
 	MenuList,
 	MenuItem,
 	MenuDivider,
-	useDisclosure,
 	useColorModeValue,
 	Stack,
 } from "@chakra-ui/react";
@@ -36,11 +35,19 @@ const NavLink = ({ children }) => (
 
 const Links = ["Dashboard", "Projects", "Team"];
 
-export function NavBar() {
-	const { isOpen, onOpen, onClose } = useDisclosure();
-
+export function NavBar({ isOpen, onOpen, onClose }) {
 	return (
-		<Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+		<Box
+			bg={useColorModeValue("gray.100", "gray.900")}
+			px={4}
+			style={{
+				position: "fixed",
+				top: 0,
+				left: 0,
+				width: "100vw",
+				zIndex: 999,
+			}}
+		>
 			<Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
 				<IconButton
 					size={"md"}
