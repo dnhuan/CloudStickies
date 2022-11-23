@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { selectStickies } from "./stickiesSlice";
 import { Box } from "@chakra-ui/react";
 import { Sticky } from "./components/Sticky";
+import { DragResizable } from "../../components/drag-resizable/DragResizable";
 
 export function Stickies() {
 	const stickies = useSelector(selectStickies);
@@ -18,14 +19,15 @@ export function Stickies() {
 		>
 			<Box>
 				{stickies.map((sticky, index) => (
-					<Sticky
+					<DragResizable
 						key={sticky.id}
-						sticky={sticky}
-						x={index * 10}
-						y={(330 + 10) * index}
+						x={20 * index}
+						y={20 * index}
 						h={330}
 						w={330}
-					/>
+					>
+						<Sticky sticky={sticky} />
+					</DragResizable>
 				))}
 			</Box>
 		</Box>
